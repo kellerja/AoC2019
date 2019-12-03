@@ -1,5 +1,5 @@
 # AoC2019
-Advent of Code 2019 solutions
+[Advent of Code 2019](https://adventofcode.com/2019) solutions
 
 There is a solution.py for all parts (2 per day)
 
