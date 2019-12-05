@@ -1,5 +1,5 @@
 venv
-Day [0-9] - *
-Day [0-9][0-9] - *
+Day [0-9] - Advent of Code*
+Day [0-9][0-9] - Advent of Code*
 input.txt
 output.txt
