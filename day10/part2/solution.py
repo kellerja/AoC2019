@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, acos, pi
 from queue import Queue
 
 
@@ -37,7 +37,10 @@ def is_vec_direction_same(unit_vector_a, unit_vector_b, accuracy):
 
 
 def angle(unit_vec_a, unit_vec_b):
-    return (unit_vec_a[0] * unit_vec_b[0] + unit_vec_a[1] + unit_vec_b[1]) / 1
+    angle = acos(unit_vec_a[0] * unit_vec_b[0] + unit_vec_a[1] * unit_vec_b[1])
+    if unit_vec_b[0] < unit_vec_a[0]:
+        return 2 * pi - angle
+    return angle
 
 
 def count_visible_asteroids_from(origin, asteroids):
@@ -57,15 +60,16 @@ def count_visible_asteroids_from(origin, asteroids):
 
 if __name__ == '__main__':
     asteroids = read_input()
-    best_score = 286#0
-    best_origin = (8,3)#None
-    """for asteroid in asteroids:
+    best_score = 0
+    best_origin = None
+    for asteroid in asteroids:
         score = count_visible_asteroids_from(asteroid, asteroids)
         if score > best_score:
             best_score = score
-            best_origin = asteroid"""
+            best_origin = asteroid
 
-    laser_start_unit_vec = to_unit_vec(best_origin, (best_origin[0], best_origin[1] + 1))
+    print(f'Found best asteroid for laser: {best_origin} (with score {best_score})')
+    laser_start_unit_vec = to_unit_vec(best_origin, (best_origin[0], best_origin[1] - 1))
     temp_list = []
     for asteroid in asteroids:
         if asteroid == best_origin:
@@ -87,7 +91,6 @@ if __name__ == '__main__':
         previous_destroyed_vec = vec
         previous_destroyed_target = target
         count += 1
-        print(f'Destroyed {previous_destroyed_target} with shot {count}')
 
     result = previous_destroyed_target[0] * 100 + previous_destroyed_target[1]
     write_output(result)
